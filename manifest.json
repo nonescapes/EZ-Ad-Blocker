@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "My EasyList AdBlocker",
+  "version": "1.2",
+  "description": "Lightweight ad blocker using local rules and auto-closing blocked tabs.",
+  "permissions": [
+    "declarativeNetRequest",
+    "webNavigation",
+    "tabs"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["cx.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "1",
+                "enabled": true,
+                "path": "easylist.json"
+            }
+        ]
+    }
+}
